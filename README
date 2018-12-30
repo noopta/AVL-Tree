@@ -1,0 +1,4 @@
+To run this file, go to command prompt on Windows with gcc installed and follow these steps:
+  1. Type "gcc -Wall -ansi -std=c99 -pedantic  avl.c -o avl" into the command prompt
+  2. Hit enter then after compiling, type "avl". 
+  3. Program should run and the menu will appear. 
