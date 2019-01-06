@@ -1,10 +1,11 @@
 //Anupta Islam
-//1007108
+//University of Guelph
+//AVL Tree
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include <string.h>
+#include<string.h>
 
 struct Node
 {
@@ -14,21 +15,19 @@ struct Node
 	int height;
 };
 
-struct Node* newNode(char key[50])	//createNode
+struct Node* newNode(char key[50])	//create a new Node given a key
 {
 	struct Node* node = (struct Node*)
-						malloc(sizeof(struct Node));
+	malloc(sizeof(struct Node));
 	strcpy(node->key, key);
 	node->left = NULL;
 	node->right = NULL;
-	node->height = 1; // new node is initially added at leaf
+	node->height = 1;
 	return(node);
 }
 int max(int a, int b);
 
-
-
-int height(struct Node *N) 	//gets height
+int height(struct Node *N) 	//gets height of a Node
 {
 	if (N == NULL)
 		return 0;
@@ -48,7 +47,7 @@ int max(int a, int b)
 
 
 
-struct Node *rightRotate(struct Node *y)			//ffunction to rotate tree to the right
+struct Node *rightRotate(struct Node *y)			//function to rotate tree to the right
 {
 	struct Node *x = y->left;
 	struct Node *T2 = x->right;
@@ -64,7 +63,7 @@ struct Node *rightRotate(struct Node *y)			//ffunction to rotate tree to the rig
 	return x;
 }
 
-struct Node *leftRotate(struct Node *x) //function to rotate tree to the left
+struct Node *leftRotate(struct Node *x)  //function to rotate tree to the left
 {
 	struct Node *y = x->right;
 	struct Node *T2 = y->left;
@@ -167,7 +166,7 @@ bool Search(struct Node* root, char string[50]){ 	//checks if the string exists 
   }
 }
 
-int counter(struct Node *root)		//counts the number of nodes
+int counter(struct Node *root)	//counts the number of nodes in the tree
 {
 
 int count = 1;
@@ -186,7 +185,7 @@ else
 
 }
 
-struct Node * minValue(struct Node* root)		//gets the lowest value
+struct Node * minValue(struct Node* root)		//gets the lowest value in the tree
 {
 	struct Node* current = root;
 
@@ -196,7 +195,7 @@ struct Node * minValue(struct Node* root)		//gets the lowest value
 	return current;
 }
 
-struct Node* delete(struct Node* root,char key[50])		//delets a node given a string
+struct Node* delete(struct Node* root,char key[50])		//function to delete a node in the tree given a string
 {
 	if(root==NULL){
 		return root;
@@ -235,19 +234,8 @@ struct Node* delete(struct Node* root,char key[50])		//delets a node given a str
 
 	return root;
 }
-/*
-int findSum(struct Node *root)
-{
 
-if(root == NULL){
-	return 0;
-}
-
-return (root->key+findSum(root->left)+ findSum(root->right));
-
-}
-*/
-/* Drier program to test above function*/
+/*Main function below to test the functions above and create the tree*/
 int main()
 {
 struct Node *root = NULL;
@@ -266,19 +254,12 @@ printf("6.Exit\n");
 
 
 root = insert(root, "abc");		//hardcoding strings and creating the avl tree,
-root = insert(root, "def");	//FOR PEOPLE MARKING INSERT KEYS HERE instead of "abc", "def". etc and test my code for 2,3,4,5,7
+root = insert(root, "def");
 root = insert(root, "ghi");
 root = insert(root, "jkl");
 root = insert(root, "mno");
 root = insert(root, "pqr");
-/*
-root = insert(root, 100);
-root = insert(root, 200);
-root = insert(root, 300);
-root = insert(root, 400);
-root = insert(root, 500);
-root = insert(root, 600);
-*/
+
 do{
 printf("Enter a code(1-6) and hit Return\n");
 printf("avl/>");
@@ -296,23 +277,6 @@ switch(choose){
 	testTwo = counter(root);
 	printf("%d nodes\n", testTwo);
 
-
-/*
-  FILE *fp;
-  char buffer[200];
-
-
-  fp = fopen("file.txt","r");
-	char* input;
-  while(fscanf(fp,"%s", buffer) != EOF){
-		input = malloc(sizeof(char) * 50);
-		strcpy(input,buffer);
-    root = insert(root, input);
-		printf("hello");
-  }
-
-  fclose(fp);
-*/
 	break;
 
 	case 2:
@@ -320,7 +284,7 @@ switch(choose){
 	scanf("%s", keyVal);
 
 	if(Search(root,keyVal)==true){
-		printf("key: %s found.", keyVal, root->height);
+		printf("key: %s found.\n", keyVal, root->height);
 	}
 	else{
 		printf("No_such_key\n");
@@ -349,12 +313,7 @@ switch(choose){
 	printf("Preorder traversal of the constructed AVL"
 			" tree is \n");
 	preOrder(root);
-printf("\n");
-
-/*
-	test = findSum(root);
-	printf("The sum of all keys is %d\n", test);
-*/
+  printf("\n");
 
 
 	break;
@@ -364,22 +323,7 @@ printf("\n");
 
 	}
 
-
-}while(choose!=6);			//while choice isnt 7 keep the menu popping up
-
-/* Constructing tree given in the above figure */
-
-
-/* The constructed AVL Tree would be
-			30
-		/ \
-		20 40
-		/ \	 \
-	10 25 50
-*/
-
-
-
+}while(choose<6);	// wuntil the user enters 6, keep showing the menu
 
 return 0;
 }
